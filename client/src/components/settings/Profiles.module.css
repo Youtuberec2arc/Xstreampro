@@ -1,0 +1,550 @@
+.gate {
+  min-height: 100dvh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  overflow-y: auto;
+  padding: max(env(safe-area-inset-top), var(--space-5))
+    max(env(safe-area-inset-right), var(--space-4)) max(env(safe-area-inset-bottom), var(--space-5))
+    max(env(safe-area-inset-left), var(--space-4));
+  background:
+    radial-gradient(circle at 50% 0%, var(--accent-subtle), transparent 55%), var(--bg-main);
+  color: var(--text-primary);
+  animation: gateFadeIn 0.35s var(--ease-smooth);
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base);
+}
+
+.gateExiting {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+}
+
+.appEntering {
+  animation: appEnter 0.4s var(--ease-smooth);
+}
+
+@keyframes gateFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes appEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes panelSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dotPulse {
+  0%,
+  60%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+.gateInner {
+  width: min(100%, 880px);
+  margin: clamp(2rem, 12vh, 7rem) auto auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  animation: gateFadeIn 0.35s var(--ease-smooth);
+}
+
+.connecting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding-top: clamp(2rem, 8vh, 4rem);
+}
+
+.connectingLogo {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+  background:
+    radial-gradient(circle at 35% 30%, var(--accent-light, var(--accent)), transparent 60%),
+    var(--accent);
+  animation: breathe 1.6s ease-in-out infinite;
+}
+
+.connectingDots {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.connectingDots span {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+  background: var(--text-secondary);
+  animation: dotPulse 1.1s ease-in-out infinite;
+}
+
+.connectingDots span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.connectingDots span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.gateTitle {
+  margin: 0;
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.profileGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(104px, 100%), 148px));
+  justify-content: center;
+  gap: var(--space-5) var(--space-4);
+  width: 100%;
+}
+
+.profileCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  animation: cardIn 0.35s var(--ease-smooth) backwards;
+}
+
+.profileCard:nth-child(1) {
+  animation-delay: 0.03s;
+}
+.profileCard:nth-child(2) {
+  animation-delay: 0.07s;
+}
+.profileCard:nth-child(3) {
+  animation-delay: 0.11s;
+}
+.profileCard:nth-child(4) {
+  animation-delay: 0.15s;
+}
+.profileCard:nth-child(5) {
+  animation-delay: 0.19s;
+}
+.profileCard:nth-child(6) {
+  animation-delay: 0.23s;
+}
+.profileCard:nth-child(7) {
+  animation-delay: 0.27s;
+}
+.profileCard:nth-child(8) {
+  animation-delay: 0.31s;
+}
+
+.profileCard:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.profileCard:focus-visible {
+  outline: none;
+}
+
+.profileCardAvatar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  background: var(--bg-tertiary);
+  color: var(--text-tertiary);
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.profileCard:hover .profileCardAvatar,
+.profileCard:focus-visible .profileCardAvatar {
+  transform: translateY(-3px) scale(1.02);
+  border-color: var(--accent);
+  box-shadow: 0 12px 32px var(--accent-glow);
+}
+
+.profileCard:active .profileCardAvatar {
+  transform: scale(0.98);
+}
+
+.addAvatar {
+  border: 2px dashed var(--border-secondary);
+  background: var(--bg-tertiary);
+}
+
+.profileCard:hover .addAvatar {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.profileCardName {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ownerTag {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--text-tertiary);
+}
+
+.lockBadge {
+  position: absolute;
+  right: var(--space-2);
+  bottom: var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  backdrop-filter: blur(4px);
+}
+
+.gatePanel {
+  width: min(100%, 420px);
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-lg);
+  background: var(--bg-tertiary);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+  animation: panelSlideIn 0.35s var(--ease-smooth);
+}
+
+.panelAvatar {
+  align-self: center;
+  width: 96px;
+  height: 96px;
+}
+
+.panelTitle {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  text-align: center;
+}
+
+.gateForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.gateField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.gateField input {
+  width: 100%;
+  min-height: 44px;
+  padding: var(--space-3);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 16px;
+}
+
+.gateField input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: var(--shadow-input-focus);
+}
+
+.gateHint {
+  max-width: 42ch;
+  margin: 0;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.gateError {
+  margin: 0;
+  color: var(--danger-color);
+  text-align: center;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--text-secondary);
+  font: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.backButton:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.backButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .gateInner {
+    gap: var(--space-5);
+  }
+
+  .profileGrid {
+    grid-template-columns: repeat(auto-fit, minmax(min(96px, 100%), 128px));
+    gap: var(--space-4) var(--space-3);
+  }
+
+  .profileCard {
+    min-height: 44px;
+  }
+
+  .gatePanel {
+    padding: var(--space-5);
+    gap: var(--space-3);
+  }
+
+  .panelAvatar {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 380px) {
+  .profileGrid {
+    grid-template-columns: repeat(auto-fit, minmax(min(86px, 100%), 108px));
+    gap: var(--space-4) var(--space-2);
+  }
+
+  .gatePanel {
+    padding: var(--space-4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gate,
+  .gateInner,
+  .gatePanel,
+  .profileCard,
+  .appEntering,
+  .connectingLogo,
+  .connectingDots span {
+    animation: none;
+    transition: none;
+  }
+
+  .profileCardAvatar {
+    transition: none;
+  }
+
+  .profileCard:hover .profileCardAvatar,
+  .profileCard:focus-visible .profileCardAvatar,
+  .profileCard:active .profileCardAvatar {
+    transform: none;
+  }
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
+}
+
+.form h3,
+.form p {
+  flex-basis: 100%;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 100%;
+}
+
+.field input,
+.field select {
+  padding: var(--space-3);
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-md);
+  min-width: 0;
+}
+
+.avatarRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.avatarRow > :first-child {
+  width: 72px;
+  height: 72px;
+}
+
+.uploadButton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.uploadButton:hover {
+  background: var(--bg-elevated);
+  border-color: var(--accent);
+}
+
+.uploadButton:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.fileInput {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.fileInput:disabled {
+  cursor: not-allowed;
+}
+
+.profileList {
+  list-style: none;
+  padding: 0;
+}
+
+.profileList li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border-secondary);
+}
+
+.smallAvatar {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+.profileName {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}

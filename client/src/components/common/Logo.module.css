@@ -1,0 +1,35 @@
+.logo {
+  height: var(--logo-height, 75px);
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--logo-height, 75px) * 0.18);
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.img {
+  height: calc(var(--logo-height, 75px) * var(--logo-scale, 1.9));
+  width: auto;
+  display: block;
+  object-fit: contain;
+  user-select: none;
+  align-self: flex-end;
+  margin-bottom: calc(var(--logo-height, 75px) * var(--logo-drop, -0.7));
+  flex-shrink: 0;
+}
+
+.word {
+  font-family: var(--font-family);
+  font-size: calc(var(--logo-height, 75px) * 0.68);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--text-primary);
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.logo:hover .word {
+  color: var(--accent);
+}

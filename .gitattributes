@@ -1,0 +1,2 @@
+# Auto detect text files and perform LF normalization (matches prettier endOfLine: lf)
+* text=auto eol=lf
